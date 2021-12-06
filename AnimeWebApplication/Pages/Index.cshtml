@@ -116,6 +116,23 @@
 </div>
 
 
+<p>Test message</p>
+@{
+  if (Model.CurrentUser != null)
+  {
+    <p>@Model.CurrentUser.Id</p>
+    <p>@Model.CurrentUser.Username</p>
+    <p>@Model.CurrentUser.Email</p>
+    <p>@Model.CurrentUser.Password</p>
+  }
+}
+
+<div>
+  <form method="post" name="logout">
+    <button type="submit">Logout</button>
+  </form>
+</div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -54,5 +54,5 @@
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Registration.cshtml.g.cs
-/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Profile.cshtml.g.cs
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Login.cshtml.g.cs
+/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Privacy.cshtml.g.cs

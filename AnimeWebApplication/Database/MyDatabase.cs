@@ -61,6 +61,29 @@ namespace AnimeWebApplication.Database
             await Connection.CloseAsync();
         }
 
+        public static async Task<List<User>> GetAllUsers()
+        {
+            await Connection.OpenAsync();
+            
+            var users = new List<User>();
+            
+            var cmd = new NpgsqlCommand($"SELECT * FROM \"{UserTable}\"", Connection);
+            await using var reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                users.Add(new User()
+                {
+                    Id = reader.GetGuid(0),
+                    Username = reader.GetString(1),
+                    Email = reader.GetString(2),
+                    Password = reader.GetString(3),
+                });
+            }
+            await Connection.CloseAsync();
+            
+            return users;
+        }
+
         private static string GetValues(User user) =>
             $"'{user.Id}', '{user.Username}', '{user.Email}', '{user.Password}'";
     }
