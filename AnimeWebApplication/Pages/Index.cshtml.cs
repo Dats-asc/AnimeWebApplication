@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AnimeWebApplication.Database;
 using AnimeWebApplication.Models;
@@ -29,7 +30,14 @@ namespace AnimeWebApplication.Pages
             return Page();
         }
 
-        public RedirectResult OnPost()
+        public JsonResult OnGetUsers()
+        {
+            var users = MyDatabase.GetAllUsers().Result;
+            var result = JsonSerializer.Serialize(users);
+            return new JsonResult(result);
+        }
+
+        public RedirectResult OnPost() // Logout
         {
             var token = Request.Cookies["token"];
             if (token == null)

@@ -1,19 +1,57 @@
 @page
 @model AnimeWebApplication.Pages.Profile
 
-@{
-    Layout = null;
-}
+<!doctype html>
+<html lang="en">
 
-<!DOCTYPE html>
-
-<html>
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
+
 <body>
-<div>
-    
+<form method="post" id="profile-edit-form">
+<div class="container profile-data">
+    <div class="row">
+        <div class="col data-holder">
+            <p>Поменять никнейм:</p>
+            <input type="text" name="username" class="row form-control" id="username"/>
+        </div>
+        <div class="col data-holder">
+            <p>Дата рождения: @Model.CurrentProfile.Birthday</p>
+            <input type="date" class="form-control" name="birthday" id="birthday"/>
+            <p>Город: @Model.CurrentProfile.City</p>
+            <input type="text" class="form-control" name="city" placeholder="city" id="city"/>
+            <p>Описание: @Model.CurrentProfile.Description</p>
+            <input type="text" class="form-control" name="description" placeholder="description" id="description"/>
+            
+            <p>Пол: </p>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="sex" id="men" autocomplete="men" checked> Муж.
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="sex" id="fem" autocomplete="female"> Жен.
+              </label>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 20px 0">
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="edit-btn">Редактировать</button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-danger" id="logout-btn">Выйти из аккаунта</button>
+        </div>
+    </div>
 </div>
+</form>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/profile.js"></script>
 </body>
 </html>

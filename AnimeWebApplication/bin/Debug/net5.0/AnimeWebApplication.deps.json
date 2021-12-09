@@ -33,11 +33,11 @@
     ".NETCoreApp,Version=v5.0": {
       "AnimeWebApplication/1.0.0": {
         "dependencies": {
-          "EntityFramework": "5.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.12",
           "Microsoft.EntityFrameworkCore.Design": "5.0.12",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10",
           "System.Security.Principal": "4.3.0",
+          "jQuery": "3.6.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -327,17 +327,6 @@
           "AnimeWebApplication.dll": {}
         }
       },
-      "EntityFramework/5.0.0": {
-        "runtime": {
-          "lib/net45/EntityFramework.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.20627.0"
-          }
-        },
-        "compile": {
-          "lib/net45/EntityFramework.dll": {}
-        }
-      },
       "Humanizer.Core/2.8.26": {
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {
@@ -346,6 +335,7 @@
           }
         }
       },
+      "jQuery/3.6.0": {},
       "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.12": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.7.1"
@@ -2311,19 +2301,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EntityFramework/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-WYfgJWKg/RjwU8pzZkImD9DsV+J1nqDcIGp1S0/bdnElKBmAaUC2nmq/QQAcco32KyQQWnLgJNiDzIOz2xWFbQ==",
-      "path": "entityframework/5.0.0",
-      "hashPath": "entityframework.5.0.0.nupkg.sha512"
-    },
     "Humanizer.Core/2.8.26": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
+    "jQuery/3.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sSzCTDWn15waSMjDrP21jjgG1j1pwISLaKiVCClwU4XGAmuZt+FScLkdyRvh9ppoIxAW/tJtJBYei+3CAwFQ7g==",
+      "path": "jquery/3.6.0",
+      "hashPath": "jquery.3.6.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.12": {
       "type": "package",

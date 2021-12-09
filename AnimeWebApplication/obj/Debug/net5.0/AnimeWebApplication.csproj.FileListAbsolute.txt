@@ -36,7 +36,6 @@
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/AnimeWebApplication.pdb
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/AnimeWebApplication.genruntimeconfig.cache
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/AnimeWebApplication.csproj.CopyComplete
-/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/EntityFramework.dll
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.dll
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Relational.dll
@@ -55,4 +54,6 @@
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Registration.cshtml.g.cs
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Login.cshtml.g.cs
-/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Privacy.cshtml.g.cs
+/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Profile.cshtml.g.cs
+/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Handler.cshtml.g.cs
+/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Logout.cshtml.g.cs

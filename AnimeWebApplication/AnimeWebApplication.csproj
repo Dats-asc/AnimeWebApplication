@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="EntityFramework" Version="5.0.0" />
+      <PackageReference Include="jQuery" Version="3.6.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
         <PrivateAssets>all</PrivateAssets>
@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <Folder Include="Migrations" />
+      <Folder Include="wwwroot\img" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Text.Json;
 using AnimeWebApp;
 using AnimeWebApplication.Database;
 using AnimeWebApplication.Models;
@@ -17,12 +18,19 @@ namespace AnimeWebApplication.Pages
         {
             this.jWTAuthenticationManager = jWTAuthenticationManager;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            
+            if (Request.Cookies["token"] != null)
+            {
+                return Redirect("/index");
+            }
+            else
+            {
+                return Page();
+            }
         }
 
-        public async Task<IActionResult> OnPost(string email, string username, string password, string confirmPassword)
+        public async Task<PageResult> OnPostAddUser([FromForm]string email, [FromForm]string username, [FromForm]string password, [FromForm]string confirmPassword)
         {
             if (ModelState.IsValid && password == confirmPassword)
             {
@@ -39,20 +47,23 @@ namespace AnimeWebApplication.Pages
                             Password = Encryption.EncryptString(password),
                             Username = username,
                         };
+                        var profile = new Models.Profile()
+                        {
+                            Id = currentUser.Id,
+                        };
+                        currentUser.Profile = profile;
+                        
                         await MyDatabase.Add(currentUser);
-
+                        await MyDatabase.Add(profile);
+                        
                         var token = jWTAuthenticationManager.Authenticate(currentUser);
                         Response.Cookies.Append("token", token);
-                        RedirectToAction("Index", "Home");
-
-                        return Redirect("/index");
                     }
                     else
                         ModelState.AddModelError("", $"Пользователь с такой почтой или именем пользователя  уже зарегистрирован.");
                 }
             }
-            else
-                ModelState.AddModelError("", $"Не все поля заполнены.");
+            //return JsonSerializer.Serialize("das"); 
             return Page();
         }
     }

@@ -128,13 +128,29 @@
 }
 
 <div>
-  <form method="post" name="logout">
-    <button type="submit">Logout</button>
+  <form name="logout">
+    <button type="submit" id="logout-btn">Logout</button>
   </form>
 </div>
 
+<a href="/profile">Profile</a>
+
+<button type="button" class="btn btn-primary" onclick="getUsers()">users</button>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/index.js"></script>
+<script>
+  function getUsers() {
+    $.ajax({
+        type: "GET",
+        url: "/index?handler=Users",
+        success: function(data) {
+            alert(data.parseJSON(data));
+        }
+    });     
+  }
+</script>
 </body>
 
 </html>

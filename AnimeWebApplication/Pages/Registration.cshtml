@@ -14,7 +14,6 @@
     <title></title>
 </head>
 <body>
-
 <div class="main-page">
     <div class=content-page>
         <h1 class="registrationnew">Регистрация нового пользователя</h1>
@@ -25,19 +24,37 @@
                 <p>После заполнения формы вам на e-mail придет письмо с подтверждением.</p> 
             </ol>
         </div> 
-        <form method="post">
-            <div class="fields">
-                <input type="text" name="email" placeholder="Ваш E-mail">
-                <input type="text" name="username" placeholder="Ваш ник, под ним вас будут видеть другие пользователи">
-                <input type="text" name="password" placeholder="Пароль">
-                <input type="text" name="confirmPassword" placeholder="Повтор пароля">
-                <button type="submit" class="btn">Зарегистрироваться</button>
-            </div>
+        <form id="registration-form" role="form">
+        <div class="fields">
+            @Html.AntiForgeryToken()
+            <input type="text" name="email" placeholder="Ваш E-mail">
+            <input type="text" name="username" placeholder="Ваш ник, под ним вас будут видеть другие пользователи">
+            <input type="text" name="password" placeholder="Пароль">
+            <input type="text" name="confirmPassword" placeholder="Повтор пароля">
+            <button type="submit" onclick="postData()" style="margin: 20px 0">Зарегистрироваться</button>
+        </div>
         </form>
     </div>
 </div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script><!--подключение jquery-->
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+        
+        function postData(){
+            $.ajax({
+                type: "POST",
+                url: "/registration?handler=AddUser",
+                headers: {
+                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                data: $('#registration-form').serialize(),
+                success: function() {
+                    window.location.replace("/index");
+                }
+            });
+        }
+</script>
 </body>
 </html>
