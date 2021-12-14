@@ -17,9 +17,13 @@ namespace AnimeWebApplication.Database
 
         private static string UserProperties = "id, username, email, password";
         private static string ProfileProperties = "id, birthday, city, description, sex";
+        private static string UserPhotoProperties = "id, name, path";
+        private static string AnimePropertires = "anime_id, title, description";
         
         private static string UserTable = "users";
         private static string ProfileTable = "profiles";
+        private static string UserPhotoTable = "user_photos";
+        private static string AnimeTable = "anime";
 
         public static async Task Add(User user)
         {
@@ -33,12 +37,36 @@ namespace AnimeWebApplication.Database
             await Connection.CloseAsync();
         }
         
+        public static async Task Add(Anime anime)
+        {
+            await Connection.OpenAsync();
+            
+            var userValues = GetValues(anime);
+            var comm = $"INSERT INTO \"{AnimeTable}\" ({AnimePropertires}) VALUES ({userValues});";
+            var cmd = new NpgsqlCommand(comm, Connection);
+            await cmd.ExecuteNonQueryAsync();
+
+            await Connection.CloseAsync();
+        }
+        
         public static async Task Add(Models.Profile profile)
         {
             await Connection.OpenAsync();
             
             var profileValues = GetValues(profile);
             var comm = $"INSERT INTO \"{ProfileTable}\" ({ProfileProperties}) VALUES ({profileValues});";
+            var cmd = new NpgsqlCommand(comm, Connection);
+            await cmd.ExecuteNonQueryAsync();
+            
+            await Connection.CloseAsync();
+        }
+        
+        public static async Task Add(UserPhoto photo)
+        {
+            await Connection.OpenAsync();
+            
+            var profileValues = GetValues(photo);
+            var comm = $"INSERT INTO \"{UserPhotoTable}\" ({UserPhotoTable}) VALUES ({profileValues});";
             var cmd = new NpgsqlCommand(comm, Connection);
             await cmd.ExecuteNonQueryAsync();
             
@@ -83,6 +111,28 @@ namespace AnimeWebApplication.Database
             return users;
         }
         
+        public static async Task<List<Anime>> GetAllAnimeItems()
+        {
+            await Connection.OpenAsync();
+            
+            var animes = new List<Anime>();
+            
+            var cmd = new NpgsqlCommand($"SELECT * FROM \"{AnimeTable}\"", Connection);
+            await using var reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                animes.Add(new Anime()
+                {
+                    AnimeId = reader.GetGuid(0),
+                    Title = reader.GetString(1),
+                    Description = reader.GetString(2),
+                });
+            }
+            await Connection.CloseAsync();
+            
+            return animes;
+        }
+        
         public static async Task<List<Models.Profile>> GetAllProfiles()
         {
             await Connection.OpenAsync();
@@ -122,5 +172,9 @@ namespace AnimeWebApplication.Database
             $"'{user.Id}', '{user.Username}', '{user.Email}', '{user.Password}'";
         private static string GetValues(Models.Profile profile) =>
             $"'{profile.Id}', '{profile.Birthday}', '{profile.City}', '{profile.Description}', '{profile.Sex}'";
+        private static string GetValues(UserPhoto photo) =>
+            $"'{photo.Id}', '{photo.Name}', '{photo.Path}'";
+        private static string GetValues(Anime anime) =>
+            $"'{anime.AnimeId}', '{anime.Title}', '{anime.Description}'";
     }
 }

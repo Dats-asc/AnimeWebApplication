@@ -18,7 +18,8 @@ namespace AnimeWebApplication.Pages
 
         
         public User CurrentUser;
-        
+
+        public List<Anime> AllAnime;
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -27,13 +28,16 @@ namespace AnimeWebApplication.Pages
         public PageResult OnGet()
         {
             InitCurrentUser();
+            AllAnime = MyDatabase.GetAllAnimeItems().Result;
             return Page();
         }
 
         public JsonResult OnGetUsers()
         {
-            var users = MyDatabase.GetAllUsers().Result;
-            var result = JsonSerializer.Serialize(users);
+            var dbUsers = MyDatabase.GetAllUsers().Result;
+            var users = new Dictionary<string, List<User>>();
+            users.Add("users", dbUsers);
+            var result = JsonSerializer.Serialize<Dictionary<string, List<User>>>(users);
             return new JsonResult(result);
         }
 

@@ -27,4 +27,19 @@ $(function (){
             }
         });
     });
+
+
+    $("#get-profile-btn").click(function (){
+        $.ajax({
+            type: "GET",
+            url: "/profile?handler=UserProfile",
+            headers: {
+                "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+            },
+            success: function(data) {
+                var profileData = JSON.parse(data);
+                alert(profileData.City);
+            }
+        });
+    });
 });

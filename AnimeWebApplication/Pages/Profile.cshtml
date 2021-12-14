@@ -12,30 +12,41 @@
 </head>
 
 <body>
-<form method="post" id="profile-edit-form">
 <div class="container profile-data">
     <div class="row">
         <div class="col data-holder">
+            <div>
+                <form id="form" name="form" action="/profile?handler=AddUser" enctype="multipart/form-data" method="post">
+                  <div class="buttons">
+                    <div class="upload-button">
+                      <div class="label">Click me!</div>
+                      <input id="files" name="files" type="file" size="1" multiple onchange="uploadFiles('files');" />
+                    </div>
+                  </div>
+                </form>
+            </div>
             <p>Поменять никнейм:</p>
             <input type="text" name="username" class="row form-control" id="username"/>
         </div>
         <div class="col data-holder">
-            <p>Дата рождения: @Model.CurrentProfile.Birthday</p>
-            <input type="date" class="form-control" name="birthday" id="birthday"/>
-            <p>Город: @Model.CurrentProfile.City</p>
-            <input type="text" class="form-control" name="city" placeholder="city" id="city"/>
-            <p>Описание: @Model.CurrentProfile.Description</p>
-            <input type="text" class="form-control" name="description" placeholder="description" id="description"/>
-            
-            <p>Пол: </p>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-secondary active">
-                <input type="radio" name="sex" id="men" autocomplete="men" checked> Муж.
-              </label>
-              <label class="btn btn-secondary">
-                <input type="radio" name="sex" id="fem" autocomplete="female"> Жен.
-              </label>
-            </div>
+            <form method="post" id="profile-edit-form">
+                <p>Дата рождения:</p>
+                <input type="date" class="form-control" name="birthday" id="birthday"/>
+                <p>Город: </p>
+                <input type="text" class="form-control" name="city" placeholder="city" id="city"/>
+                <p>Описание: </p>
+                <input type="text" class="form-control" name="description" placeholder="description" id="description"/>
+
+                <p>Пол: </p>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="sex" id="men" autocomplete="men" checked> Муж.
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="sex" id="fem" autocomplete="female"> Жен.
+                    </label>
+                </div>
+            </form>
         </div>
     </div>
     <div class="row" style="margin: 20px 0">
@@ -45,13 +56,47 @@
         <div class="col">
             <button type="button" class="btn btn-danger" id="logout-btn">Выйти из аккаунта</button>
         </div>
+        <div class="col">
+            <a href="/addanime" type="button" class="btn btn-primary" id="addAnime-btn">Add item</a>
+        </div>
+        
+        <div class="col">
+            <button type="button" class="btn btn-danger" id="get-profile-btn">load profile</button>
+        </div>
     </div>
 </div>
-</form>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/profile.js"></script>
+@* <script> *@
+@* function uploadFiles(inputId) { *@
+@*   var input = document.getElementById(inputId); *@
+@*   var files = input.files; *@
+@*   var formData = new FormData(); *@
+@* *@
+@*   for (var i = 0; i != files.length; i++) { *@
+@*     formData.append("files", files[i]); *@
+@*   } *@
+@* *@
+@*   $.ajax( *@
+@*     { *@
+@*       url: "/profile?handler=AddUserPhoto", *@
+@*       headers: { *@
+@*         "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val() *@
+@*       }, *@
+@*       data: formData, *@
+@*        *@
+@*       processData: false, *@
+@*       contentType: false, *@
+@*       type: "POST", *@
+@*       success: function (data) { *@
+@*         alert("Files Uploaded!"); *@
+@*       } *@
+@*     } *@
+@*   ); *@
+@* } *@
+@* </script> *@
 </body>
 </html>

@@ -1,4 +1,7 @@
-﻿<html>
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using System.IdentityModel.Tokens.Jwt
+<html>
 <!doctype html>
 <html lang="en">
 
@@ -8,11 +11,10 @@
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="~/css/Main_Page_StyleSheet.css">
 </head>
-
 <body>
   <div class=top>
     <div class=container>
-      <div class=auth-block>
+      <div class="auth-block">
         <div class=login>
           <div class="dropdown-login">
             <a class="btn" href="/login">
@@ -21,6 +23,9 @@
           </div>
         </div>
         <a class=register href="/registration"> РЕГИСТРАЦИЯ</a>
+      </div>
+      <div class="user-authorized text-right" hidden="hidden">
+        <a href="/profile" class="btn btn-info" id="link-to-profile">Go to profile</a>
       </div>
     </div>
   </div>
@@ -83,6 +88,9 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  
+</script>
 
 @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -338,3 +338,16 @@ p {
         opacity: 1
     }
 }
+
+.user-authorized{
+    width: 220px;
+    height: 40px;
+    float: right;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}

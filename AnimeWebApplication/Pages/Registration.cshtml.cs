@@ -30,7 +30,12 @@ namespace AnimeWebApplication.Pages
             }
         }
 
-        public async Task<PageResult> OnPostAddUser([FromForm]string email, [FromForm]string username, [FromForm]string password, [FromForm]string confirmPassword)
+        public async Task<PageResult> OnPostAddUser(
+            [FromForm]string email, 
+            [FromForm]string username, 
+            [FromForm]string password, 
+            [FromForm]string confirmPassword
+            )
         {
             if (ModelState.IsValid && password == confirmPassword)
             {
