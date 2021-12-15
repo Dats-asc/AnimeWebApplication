@@ -1,5 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text.Json;
@@ -8,48 +6,38 @@ using AnimeWebApplication.Database;
 using AnimeWebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace AnimeWebApplication.Pages
 {
-    public class IndexModel : PageModel
+    public class UserProfile : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        
         public User CurrentUser;
-
-        public List<AnimeItem> AllAnime;
-        public IndexModel(ILogger<IndexModel> logger)
+        public Models.Profile CurrentProfile;
+        
+        public void OnGet()
         {
-            _logger = logger;
+            
         }
 
-        public PageResult OnGet()
+        public async Task<JsonResult> OnGetProfile()
         {
             InitCurrentUser();
-            AllAnime = MyDatabase.GetAllAnimeItems().Result;
-            return Page();
-        }
+            InitProfile();
 
-        public JsonResult OnGetUsers()
-        {
-            var dbUsers = MyDatabase.GetAllUsers().Result;
-            var users = new Dictionary<string, List<User>>();
-            users.Add("users", dbUsers);
-            var result = JsonSerializer.Serialize<Dictionary<string, List<User>>>(users);
+            var profileModel = new ProfileModel()
+            {
+                Email = CurrentUser.Email,
+                Username = CurrentUser.Username,
+                PhotoPath = CurrentProfile.PhotoPath,
+                City = CurrentProfile.City,
+                Birthday = CurrentProfile.Birthday,
+                Description = CurrentProfile.Description
+            };
+
+            var result = JsonSerializer.Serialize<ProfileModel>(profileModel);
             return new JsonResult(result);
         }
-
-        public RedirectResult OnPost() // Logout
-        {
-            var token = Request.Cookies["token"];
-            if (token == null)
-                return Redirect("/index");
-            Response.Cookies.Delete("token");
-            return Redirect("/index");
-        }
-
+        
         private User FindUserByToken()
         {
             var stream = Request.Cookies["token"];
@@ -61,8 +49,8 @@ namespace AnimeWebApplication.Pages
             var user = users.FirstOrDefault(u => u.Id.ToString() == id);
             return user;
         }
-
-        public void InitCurrentUser()
+        
+        private void InitCurrentUser()
         {
             if (Request.Cookies["token"] == null || Request.Cookies["token"] == "")
             {
@@ -72,6 +60,11 @@ namespace AnimeWebApplication.Pages
             {
                 CurrentUser = FindUserByToken();
             }
+        }
+        public void InitProfile()
+        {
+            var profiles = MyDatabase.GetAllProfiles().Result;
+            CurrentProfile = profiles.FirstOrDefault(p => p.Id == CurrentUser.Id);
         }
     }
 }

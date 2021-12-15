@@ -10,5 +10,6 @@ namespace AnimeWebApplication.Models
         public string Sex { get; set; }
         public string City { get; set; }
         public string Description { get; set; }
+        public string PhotoPath { get; set; }
     }
 }

@@ -23,15 +23,15 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/index.js"></script>
-@* @{ *@
-@*   if (Request.Cookies["token"] != null) *@
-@*   { *@
-@*     <script> *@
-@*       $('.auth-block').hide() *@
-@*       $('.user-authorized').attr('hidden', false); *@
-@*     </script> *@
-@*   } *@
-@* } *@
+@{
+  if (Request.Cookies["token"] != null)
+  {
+    <script>
+      $('.auth-block').hide()
+      $('.user-authorized').attr('hidden', false);
+    </script>
+  }
+}
 </body>
 
 </html>

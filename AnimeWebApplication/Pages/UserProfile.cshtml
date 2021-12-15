@@ -1,0 +1,50 @@
+@page
+@model AnimeWebApplication.Pages.UserProfile
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container" style="margin-top: 70px; margin-bottom: 100px">
+    <div class="row">
+        <div class="col">
+            <div class="text-center">
+                <img id="user-photo-holder" 
+                     src="https://avatars.mds.yandex.net/i?id=023672b5a5adb2ce5cea0d54ee59b0ab-5449748-images-thumbs&n=13&exp=1"
+                     class="img-thumbnail"
+                     style="height: 300px; 
+                     border-radius: 10px"/>
+            </div>
+        </div>
+        <div class="col">
+            <h5>Email: </h5> <p id="user-email-holder">test</p>
+            <h5>Username: </h5> <p id="user-username-holder">test</p>
+            <h5>Birthday: </h5> <p id="user-birthday-holder">test</p>
+            <h5>City: </h5> <p id="user-city-holder">test
+            <h5>Description: </h5 > <p id="user-description-holder">test</p>
+            <div class="row" style="margin-top: 40px">
+                <div class="col">
+                    <a href="/profile" type="button" class="btn btn-primary" id="edit-btn">Редактировать</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger" id="logout-btn">Выйти из аккаунта</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/userProfile.js"></script>
+</body>
+</html>

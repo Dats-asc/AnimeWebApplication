@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AnimeWebApplication.Database;
 using AnimeWebApplication.Models;
@@ -14,79 +12,69 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AnimeWebApplication.Pages
 {
-    public class Profile : PageModel
+    public class AddAnimeItem : PageModel
     {
         public User CurrentUser;
         public Models.Profile CurrentProfile;
+        private AnimeItem CurrentAnimeItem;
+        
         IWebHostEnvironment _appEnvironment;
 
-        public Profile(IWebHostEnvironment appEnvironment)
+        public AddAnimeItem(IWebHostEnvironment appEnvironment)
         {
             _appEnvironment = appEnvironment;
         }
         
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            if (Request.Cookies["token"] != null)
-            {
-                InitCurrentUser();
-                InitProfile();
-                return Page();
-            }
-            else
-            {
-                return Redirect("/login");
-            }
+            
         }
 
-        public JsonResult OnPostProfileChanged([FromForm]string birthday, [FromForm]string sex, [FromForm]string city, [FromForm]string description)
+        public JsonResult OnPostAddItem(
+            [FromForm] string name,
+            [FromForm] string description,
+            [FromForm] string year,
+            [FromForm] string ganre,
+            [FromForm] string director,
+            [FromForm] string countOfSeries
+        )
         {
-            InitCurrentUser();
-            InitProfile();
-            CurrentProfile.Birthday = birthday;
-            CurrentProfile.City = city;
-            CurrentProfile.Description = description;
-            CurrentProfile.Sex = sex;
-            
-            MyDatabase.Update(CurrentProfile);
-            return new JsonResult("ok");
+            var animeItem = new AnimeItem()
+            {
+                ItemId = Guid.NewGuid(),
+                Name = name,
+                Description = description,
+                Year = Convert.ToInt32(year),
+                Genre = ganre,
+                Director = director,
+                SeriesCount = Convert.ToInt32(countOfSeries)
+            };
+
+            MyDatabase.Add(animeItem);
+            return new JsonResult(animeItem.ItemId);
         }
-        
-        public async Task<JsonResult> OnPostUploadPhoto(IFormFile uploadedFile)
+
+        public async Task<JsonResult> OnPostUploadPhoto(IFormFile uploadedFile, string itemId)
         {
-            InitCurrentUser();
-            InitProfile();
+            var animeItems = MyDatabase.GetAllAnimeItems().Result;
+            var animeItem = animeItems.FirstOrDefault(i => i.ItemId == Guid.Parse(itemId));
             var photoPath = "";
             if (uploadedFile != null)
             {
-                // путь к папке Files
-                string path = "/UserPhotos/"+ CurrentUser.Username + uploadedFile.FileName;
-                // сохраняем файл в папку Files в каталоге wwwroot
+                string path = "/ItemPosters/" + animeItem.Name + uploadedFile.FileName;
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
+
+                animeItem.PosterPath = path;
                 photoPath = path;
-                CurrentProfile.PhotoPath = path;
-                MyDatabase.Update(CurrentProfile);
             }
+            
+            MyDatabase.Update(animeItem);
             return new JsonResult(photoPath);
         }
-
-        public JsonResult OnGetUserProfile()
-        {
-            InitCurrentUser();
-            var profiles = MyDatabase.GetAllProfiles().Result;
-            var profile = profiles.FirstOrDefault(p => p.Id == CurrentUser.Id);
-
-            var result = JsonSerializer.Serialize(profile);
-            return new JsonResult(result);
-            
-            // else
-            // {
-            //     return new JsonResult("error");
-            // }
-        }
+        
         
         private User FindUserByToken()
         {

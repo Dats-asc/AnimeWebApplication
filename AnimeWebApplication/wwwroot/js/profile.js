@@ -1,5 +1,7 @@
 $(function (){
     
+    
+    // редактирование
     $('#edit-btn').click(function (){
         $.ajax({
             type: "POST",
@@ -15,6 +17,8 @@ $(function (){
         });
     });
     
+    
+    // выход из аккаунта
     $('#logout-btn').click(function (){
         $.ajax({
             type: "GET",
@@ -29,6 +33,7 @@ $(function (){
     });
 
 
+    // данные профиля
     $("#get-profile-btn").click(function (){
         $.ajax({
             type: "GET",
@@ -42,4 +47,29 @@ $(function (){
             }
         });
     });
+
+    // Загрузка фотографии
+    $('#file').on('change' ,function (){
+        var files = $('#file').prop("files");
+        var url = "/profile?handler=UploadPhoto";
+        formData = new FormData();
+        formData.append("uploadedFile", files[0]);
+
+       $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+           success: function (data){
+               //setTimeout(function (){},5000);
+                $('#userPhoto').attr("src", data)
+           }
+        });
+    })
 });
