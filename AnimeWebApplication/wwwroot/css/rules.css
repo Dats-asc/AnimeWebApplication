@@ -1,0 +1,34 @@
+body {
+    background-color: #e2e2e2;
+    width: 100%;
+    min-height: 80vh;
+}
+h2 {
+    margin-left: 5%;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+.main-page {
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    background-color: #ccc;
+    height: 100vh;
+}
+
+.content-page {
+    position: absolute;
+    margin-left: 15%;
+    background-color: #fff;
+    width: 70%;
+    height: 100%;
+}
+.heading {
+    text-align: center;
+}
+p,ol,li{
+    margin-left: 4%;
+}
+.cont{
+    margin-left: 4%;
+}

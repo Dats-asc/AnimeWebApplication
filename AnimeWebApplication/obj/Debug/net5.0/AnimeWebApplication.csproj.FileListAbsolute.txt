@@ -61,3 +61,5 @@
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/UserProfile.cshtml.g.cs
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/AddAnimeItem.cshtml.g.cs
 /Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/ItemDetail.cshtml.g.cs
+/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/AboutPage.cshtml.g.cs
+/Users/rustamhajrullin/RiderProjects/AnimeWebApplication/AnimeWebApplication/obj/Debug/net5.0/Razor/Pages/Rules.cshtml.g.cs
