@@ -81,13 +81,8 @@ namespace AnimeWebApplication.Pages
 
             var result = JsonSerializer.Serialize(profile);
             return new JsonResult(result);
-            
-            // else
-            // {
-            //     return new JsonResult("error");
-            // }
         }
-        
+
         private User FindUserByToken()
         {
             var stream = Request.Cookies["token"];

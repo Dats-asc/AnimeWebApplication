@@ -1,41 +1,94 @@
-$('#getUsers').click(function (){
-    $.ajax({
-        type: "GET",
-        url: "/index?handler=Users",
-        success: function(data) {
-            var parsedData = JSON.parse(data);
-            parsedData.users.forEach(user => printUser(user));
-        }
+
+
+
+$.ajax({
+    type: "GET",
+    url: "/index?handler=AnimeItems",
+    success: function(data) {
+        var parsedData = JSON.parse(data)
+        parsedData.items.forEach(item => pringData(item));
+    }
+});
+
+function pringData(item){
+    var card = document.createElement("div")
+    card.setAttribute('class', 'card item-holder')
+    card.setAttribute('id', item.ItemId)
+    card.setAttribute('style', 'width: 18rem;')
+    var cardBody = document.createElement("div");
+    cardBody.setAttribute('class', 'card-body')
+    var cardTitle = document.createElement("h4");
+    cardTitle.setAttribute('class', 'card-title')
+    cardTitle.innerHTML = item.Name;
+    var cardText = document.createElement("p");
+    cardText.setAttribute('class', 'card-text')
+    cardText.innerHTML = item.Description;
+    cardText.setAttribute('style', 'background-color = red;')
+    var cardYear = document.createElement('p')
+    cardYear.setAttribute('class', 'card-text')
+    cardYear.innerHTML = "Год выпуска: " + item.Year
+    var cardGenre = document.createElement('p')
+    cardGenre.setAttribute('class', 'card-text')
+    cardGenre.innerHTML = "Жанр: " + item.Genre
+    var cardDirector = document.createElement('p')
+    cardDirector.setAttribute('class', 'card-text')
+    cardDirector.innerHTML = "Режисер: " + item.Director
+    var cardSeriesCount = document.createElement('p')
+    cardSeriesCount.setAttribute('class', 'card-text')
+    cardSeriesCount.innerHTML = "Число серий: " + item.SeriesCount
+    var cardDeleteButton = document.createElement('button')
+    cardDeleteButton.setAttribute('class', 'btn btn-danger btn-sm')
+    cardDeleteButton.setAttribute('type','button')
+    cardDeleteButton.innerHTML = 'Удалить'
+    cardDeleteButton.addEventListener('click', function (){
+        onItemDeleteButtonClick(item.ItemId)
+    });
+    var cardDetailButton = document.createElement('button')
+    cardDetailButton.setAttribute('class', 'btn btn-primary btn-sm')
+    cardDetailButton.setAttribute('type','button')
+    cardDetailButton.setAttribute('style','margin-left: 10px')
+    cardDetailButton.innerHTML = 'Детали'
+    cardDetailButton.addEventListener('click', function (){
+        onCardClicked(item.ItemId)
     });
 
-    function printUser(user) {
-        // var newElement = document.createElement("p");
-        // newElement.innerHTML = user.Id.toString();
-        // document.getElementById("test").appendChild(newElement);
-        
-        var card = document.createElement("div");
-        card.setAttribute('class', 'card')
-        card.setAttribute('style', 'width: 18rem;')
-        var cardBody = document.createElement("div");
-        cardBody.setAttribute('class', 'card-body')
-        var cardTitle = document.createElement("h5");
-        cardTitle.setAttribute('class', 'card-title')
-        cardTitle.innerHTML = user.Username;
-        var cardText = document.createElement("p");
-        cardText.setAttribute('class', 'card-text')
-        cardText.innerHTML = user.Password;
-        cardText.setAttribute('style', 'background-color = red;')
-        
-        var cardImgTop = document.createElement("img");
-        cardImgTop.setAttribute('class', 'card-img-top')
-        cardImgTop.setAttribute('src', 'https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg')
-        
-        cardBody.appendChild(cardTitle);
-        cardBody.appendChild(cardText);
-        
-        card.appendChild(cardImgTop)
-        card.appendChild(cardBody);
-        
-        document.getElementById("content").appendChild(card);
-    };
-});
+    var cardImgTop = document.createElement("img");
+    cardImgTop.setAttribute('class', 'card-img-top card-img')
+    cardImgTop.setAttribute('src', item.PosterPath)
+    cardBody.appendChild(cardTitle)
+    cardBody.appendChild(cardText)
+    cardBody.appendChild(cardYear)
+    cardBody.appendChild(cardGenre)
+    cardBody.appendChild(cardDirector)
+    cardBody.appendChild(cardSeriesCount)
+    cardBody.appendChild(cardDeleteButton)
+    cardBody.appendChild(cardDetailButton)
+
+    card.appendChild(cardImgTop)
+    card.appendChild(cardBody);
+
+    document.getElementById("items-holder").appendChild(card);
+}
+
+function onItemDeleteButtonClick(itemId){
+    $.ajax({
+        type: "GET",
+        url: "/index?handler=DeleteItem",
+        data: {itemId: itemId},
+        success: function(data) {
+            var card = document.getElementById(itemId);
+            document.getElementById('items-holder').removeChild(card)
+        }
+    });
+}
+
+function onCardClicked(itemId){
+    $.ajax({
+        type: 'GET',
+        url: '/index?handler=AnimeItemPicked',
+        data: {itemId: itemId},
+        success: function (data){
+            window.location.replace("/itemdetail");
+        }
+    });
+}

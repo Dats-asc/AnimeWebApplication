@@ -61,6 +61,38 @@ namespace AnimeWebApplication.Pages
             var user = users.FirstOrDefault(u => u.Id.ToString() == id);
             return user;
         }
+        
+        public JsonResult OnGetAnimeItems()
+        {
+            var items = MyDatabase.GetAllAnimeItems().Result;
+            var animteItems = new Dictionary<string, List<AnimeItem>>();
+            animteItems.Add("items", items);
+            
+            var result = JsonSerializer.Serialize<Dictionary<string, List<AnimeItem>>>(animteItems);
+
+            return new JsonResult(result);
+        }
+
+        public JsonResult OnGetDeleteItem(string itemId)
+        {
+            MyDatabase.RemoveFromAnimeItems(itemId);
+            return new JsonResult("ok");
+        }
+        
+        public JsonResult OnGetAnimeItemPicked(string itemId)
+        {
+            if (Request.Cookies["itemId"] == null)
+            {
+                Response.Cookies.Append("itemId", itemId);
+            }
+            else
+            {
+                Response.Cookies.Delete("itemId");
+                Response.Cookies.Append("itemId", itemId);
+            }
+
+            return new JsonResult("append");
+        }
 
         public void InitCurrentUser()
         {

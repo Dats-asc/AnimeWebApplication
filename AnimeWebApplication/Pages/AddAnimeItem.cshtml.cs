@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AnimeWebApplication.Database;
 using AnimeWebApplication.Models;
@@ -74,7 +76,21 @@ namespace AnimeWebApplication.Pages
             MyDatabase.Update(animeItem);
             return new JsonResult(photoPath);
         }
-        
+
+        public async Task<JsonResult> OnGetAnimeItems()
+        {
+            var items = MyDatabase.GetAllAnimeItems().Result;
+            var animeItems = new Dictionary<string, List<string>>();
+            var items1 = new List<string>();
+            foreach (var item in items)
+            {
+                items1.Add(item.Name);
+            }
+            animeItems.Add("items", items1);
+            var result = JsonSerializer.Serialize<Dictionary<string, List<string>>>(animeItems);
+            return new JsonResult(result);
+        }
+         
         
         private User FindUserByToken()
         {

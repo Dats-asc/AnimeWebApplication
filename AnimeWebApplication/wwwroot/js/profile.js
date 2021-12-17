@@ -71,5 +71,5 @@ $(function (){
                 $('#userPhoto').attr("src", data)
            }
         });
-    })
+    });
 });

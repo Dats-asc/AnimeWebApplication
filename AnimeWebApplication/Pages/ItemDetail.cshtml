@@ -1,0 +1,36 @@
+@page
+@model AnimeWebApplication.Pages.ItemDetail
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container profile-data" style="margin: 50px 0">
+    <div class="row">
+        <div class="col data-holder" id="img-holder">
+            <div>
+                <img src="" id="for-userPhoto" class="img-thumbnail" style="max-height: 400px; border-radius: 10px"/>
+            </div>
+        </div>
+        <div class="col data-holder" id="item-holder">
+        
+        </div>
+    </div>
+
+    <div class="row" style="margin: 40px 0">
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/itemDetails.js"></script>
+</body>
+</html>

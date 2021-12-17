@@ -351,3 +351,8 @@ p {
     justify-content: center;
     margin-bottom: 5px;
 }
+
+.item-holder{
+    padding: 8px;
+    margin: 20px 45px;
+}

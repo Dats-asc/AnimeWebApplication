@@ -25,3 +25,7 @@ $('#logout-btn').click(function (){
         }
     });
 })
+
+$('#add-btn').click(function (){
+    window.location.replace("/addanimeitem");
+})

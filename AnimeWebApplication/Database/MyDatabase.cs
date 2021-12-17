@@ -186,6 +186,17 @@ namespace AnimeWebApplication.Database
 
             await Connection.CloseAsync();
         }
+        
+        public static async void RemoveFromAnimeItems(string itemId)
+        {
+            await Connection.OpenAsync();
+            
+            var comm = $"DELETE FROM \"{AnimeTable}\"  WHERE item_id='{itemId}'";
+            var cmd = new NpgsqlCommand(comm, Connection);
+            await cmd.ExecuteNonQueryAsync();
+
+            await Connection.CloseAsync();
+        }
 
         private static string GetValues(User user) =>
             $"'{user.Id}', '{user.Username}', '{user.Email}', '{user.Password}'";
