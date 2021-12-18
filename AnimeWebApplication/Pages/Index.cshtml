@@ -1,10 +1,37 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/Main_Page_StyleSheet.css">
+</head>
+
+<body>  
+
+<div class="container">
+  <div id="items-holder" class="row">
+  </div>
 </div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/index.js"></script>
+@{
+  if (Request.Cookies["token"] != null)
+  {
+    <script>
+      $('.auth-block').hide()
+      $('.user-authorized').attr('hidden', false);
+    </script>
+  }
+}
+</body>
+
+</html>

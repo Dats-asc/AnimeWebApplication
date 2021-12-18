@@ -1,0 +1,361 @@
+@page
+@model AnimeWebApplication.Pages.AddAnimeItem
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container profile-data" style="margin: 50px 0">
+    <div class="row">
+        <div class="col data-holder">
+            <div>
+                <input type="file" name="uploadedFile" id="file" /><br>
+                <img src="" id="userPhoto" class="img-thumbnail" style="max-height: 400px; margin: 20px 0; border-radius: 10px"/>
+            </div>
+        </div>
+        <div class="col data-holder">
+        <form method="post" id="add-item-form">
+        <p>Название:</p>
+        <input type="text" name="name" placeholder="Название" class="form-control" id="name-input"/>
+        <div class="form-group">
+            <p>Описание: </p>
+            <textarea name="description" class="form-control" id="desc-input" rows="3"></textarea>
+        </div>
+        <p>Год выпуска: </p>
+        <input type="number" name="year" min="1970" max="2021" step="1" value="2000" id="year-input" />
+
+        <p>Жанр: </p>
+        <select class="form-select" name="ganre" aria-label="Default select example">
+        <option                             value="Альтернативная история">
+            Альтернативная история
+        </option>
+        <option                             value="Альтернативная реальность">
+            Альтернативная реальность
+        </option>
+        <option                             value="Ангелы">
+            Ангелы
+        </option>
+        <option                             value="Андроиды">
+            Андроиды
+        </option>
+        <option                             value="Антивойна">
+            Антивойна
+        </option>
+        <option                             value="Антиутопия">
+            Антиутопия
+        </option>
+        <option                             value="Баскетбол">
+            Баскетбол
+        </option>
+        <option                             value="Безумие">
+            Безумие
+        </option>
+        <option                             value="Бисёнэн">
+            Бисёнэн
+        </option>
+        <option                             value="Боевые искусства">
+            Боевые искусства
+        </option>
+        <option                             value="Божества">
+            Божества
+        </option>
+        <option                             value="Вампиры">
+            Вампиры
+        </option>
+        <option                             value="Ведьмы">
+            Ведьмы
+        </option>
+        <option                             value="Вестерн">
+            Вестерн
+        </option>
+        <option                             value="Виртуальная реальность">
+            Виртуальная реальность
+        </option>
+        <option                             value="Военная тематика">
+            Военная тематика
+        </option>
+        <option                             value="Война">
+            Война
+        </option>
+        <option                             value="Воры">
+            Воры
+        </option>
+        <option                             value="Гарем">
+            Гарем
+        </option>
+        <option                             value="Гарем (для девочек)">
+            Гарем (для девочек)
+        </option>
+        <option                             value="Гендерная интрига">
+            Гендерная интрига
+        </option>
+        <option                             value="Демоны">
+            Демоны
+        </option>
+        <option                             value="Детектив">
+            Детектив
+        </option>
+        <option                             value="Дзёсэй">
+            Дзёсэй
+        </option>
+        <option                             value="Драконы">
+            Драконы
+        </option>
+        <option                             value="Драма">
+            Драма
+        </option>
+        <option                             value="Зомби">
+            Зомби
+        </option>
+        <option                             value="Игры">
+            Игры
+        </option>
+        <option                             value="Инопланетные расы">
+            Инопланетные расы
+        </option>
+        <option                             value="Искусственный интеллект">
+            Искусственный интеллект
+        </option>
+        <option                             value="Искусство">
+            Искусство
+        </option>
+        <option                             value="Исторический">
+            Исторический
+        </option>
+        <option                             value="Исэкай">
+            Исэкай
+        </option>
+        <option                             value="Киберпанк">
+            Киберпанк
+        </option>
+        <option                             value="Киборги">
+            Киборги
+        </option>
+        <option                             value="Комедия">
+            Комедия
+        </option>
+        <option                             value="Космос">
+            Космос
+        </option>
+        <option                             value="Кулинария">
+            Кулинария
+        </option>
+        <option                             value="Лоликон">
+            Лоликон
+        </option>
+        <option                             value="Любовный треугольник">
+            Любовный треугольник
+        </option>
+        <option                             value="Магия">
+            Магия
+        </option>
+        <option                             value="Манга">
+            Манга
+        </option>
+        <option                             value="Мафия/Якудза">
+            Мафия/Якудза
+        </option>
+        <option                             value="Махо-сёдзё">
+            Махо-сёдзё
+        </option>
+        <option                             value="Машины">
+            Машины
+        </option>
+        <option                             value="Меха">
+            Меха
+        </option>
+        <option                             value="Мистика">
+            Мистика
+        </option>
+        <option                             value="Музыка">
+            Музыка
+        </option>
+        <option                             value="Не японское">
+            Не японское
+        </option>
+        <option                             value="Нелинейный сюжет">
+            Нелинейный сюжет
+        </option>
+        <option                             value="Ниндзя">
+            Ниндзя
+        </option>
+        <option                             value="Охотники за головами">
+            Охотники за головами
+        </option>
+        <option                             value="Параллельные миры">
+            Параллельные миры
+        </option>
+        <option                             value="Пародия">
+            Пародия
+        </option>
+        <option                             value="Перестрелки">
+            Перестрелки
+        </option>
+        <option                             value="Пилотируемые роботы">
+            Пилотируемые роботы
+        </option>
+        <option                             value="Пираты">
+            Пираты
+        </option>
+        <option                             value="Повседневность">
+            Повседневность
+        </option>
+        <option                             value="Политика">
+            Политика
+        </option>
+        <option                             value="Полицейские">
+            Полицейские
+        </option>
+        <option                             value="Полулюди">
+            Полулюди
+        </option>
+        <option                             value="Постапокалиптика">
+            Постапокалиптика
+        </option>
+        <option                             value="Преступность">
+            Преступность
+        </option>
+        <option                             value="Призраки">
+            Призраки
+        </option>
+        <option                             value="Приключения">
+            Приключения
+        </option>
+        <option                             value="Прокси бои">
+            Прокси бои
+        </option>
+        <option                             value="Психология">
+            Психология
+        </option>
+        <option                             value="Путешествия во времени">
+            Путешествия во времени
+        </option>
+        <option                             value="Романтика">
+            Романтика
+        </option>
+        <option                             value="Русалки">
+            Русалки
+        </option>
+        <option                             value=" Русские в аниме">
+            Русские в аниме
+        </option>
+        <option                             value="Самураи">
+            Самураи
+        </option>
+        <option                             value="Сверхъестественное">
+            Сверхъестественное
+        </option>
+        <option                             value="Сёдзё">
+            Сёдзё
+        </option>
+        <option                             value="Сёдзё-ай">
+            Сёдзё-ай
+        </option>
+        <option                             value="Сёнэн">
+            Сёнэн
+        </option>
+        <option                             value="Сёнэн-ай">
+            Сёнэн-ай
+        </option>
+        <option                             value="Силовые костюмы">
+            Силовые костюмы
+        </option>
+        <option                             value="Современное фэнтези">
+            Современное фэнтези
+        </option>
+        <option                             value="Спорт">
+            Спорт
+        </option>
+        <option                             value="Сражения на мечах">
+            Сражения на мечах
+        </option>
+        <option                             value="Стимпанк">
+            Стимпанк
+        </option>
+        <option                             value="Суккубы">
+            Суккубы
+        </option>
+        <option                             value="Суперспособности">
+            Суперспособности
+        </option>
+        <option                             value="Сэйнэн">
+            Сэйнэн
+        </option>
+        <option                             value="Тайный заговор">
+            Тайный заговор
+        </option>
+        <option                             value="Темное фэнтези">
+            Темное фэнтези
+        </option>
+        <option                             value="Темные эльфы">
+            Темные эльфы
+        </option>
+        <option                             value="Террористы">
+            Террористы
+        </option>
+        <option                             value="Трансформеры">
+            Трансформеры
+        </option>
+        <option                             value="Триллер">
+            Триллер
+        </option>
+        <option                             value="Убийцы">
+            Убийцы
+        </option>
+        <option                             value="Ужасы">
+            Ужасы
+        </option>
+        <option                             value="Фантастика">
+            Фантастика
+        </option>
+        <option                             value="Феи">
+            Феи
+        </option>
+        <option                             value="Фэнтези">
+            Фэнтези
+        </option>
+        <option                             value="Школьная жизнь">
+            Школьная жизнь
+        </option>
+        <option                             value="Экшен">
+            Экшен
+        </option>
+        <option                             value="Эльфы">
+            Эльфы
+        </option>
+        <option                             value="Эротика">
+            Эротика
+        </option>
+        <option                             value="Этти">
+            Этти
+        </option>
+        </select>
+            
+        <p>Режисер:</p>
+        <input type="text" name="director" placeholder="Название" class="form-control" id=""/>
+        
+        <p>Число серий: </p>
+        <input type="number" name="countOfSeries" min="0" max="2048" step="1" value="1" />
+        </form>
+        </div>
+    </div>
+    
+<button type="button" id="add-item-btn">Добавить</button>
+
+<div class="row" style="margin: 40px 0">
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/addAnimeItem.js"></script>
+</body>
+</html>
