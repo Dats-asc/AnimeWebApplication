@@ -104,6 +104,7 @@ namespace AnimeWebApplication.Pages
             {
                 CurrentUser = FindUserByToken();
             }
+            
         }
     }
 }
